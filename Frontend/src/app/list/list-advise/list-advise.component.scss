@@ -1,0 +1,31 @@
+.progress-bar-container {
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Progress Bar Base Styles */
+.progress-bar {
+  height: 20px;
+  line-height: 20px;
+  color: rgb(24, 11, 11);
+  text-align: center;
+  white-space: nowrap;
+  transition: width 0.3s ease;
+}
+
+/* Color Styles */
+.progress-bar-green {
+  background-color: #4caf50; /* Green */
+}
+
+.progress-bar-yellow {
+  background-color: #ffeb3b; /* Yellow */
+  color: black; /* Text color for better visibility on yellow */
+}
+
+.progress-bar-red {
+  background-color: #f44336; /* Red */
+}
+

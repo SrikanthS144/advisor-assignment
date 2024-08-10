@@ -1,0 +1,41 @@
+/* app.component.css */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.p-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.p-col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.p-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.card {
+  overflow: hidden;
+}
+
+.image-side {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+/* Make sure to add styles to apply rounded borders to the image */
+.rounded-image {
+  border-radius: 15px; /* Adjust as needed */
+  border: 2px solid #ddd; /* Optional: border color and width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for better appearance */
+  object-fit: cover; /* Ensure image covers the area */
+}
+.rounded-image {
+  border-radius: 15px;
+  overflow: hidden;
+}

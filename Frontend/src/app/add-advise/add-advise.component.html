@@ -1,0 +1,124 @@
+<div class="container mt-5">
+  <div class="p-grid">
+    <div class="p-col-12">
+      <i
+        class="pi pi-arrow-left pb-5 pt-2 large-icon"
+        style="cursor: pointer"
+        (click)="goBack()"
+      ></i>
+    </div>
+    <!-- <div class="p-col-12 p-md-6">
+      <p-image
+        src="assets/doctor-nurses-special-equipment.jpg"
+        class="rounded-image"
+        alt="Image"
+        width="550"
+        height="550"
+      >
+      </p-image>
+    </div> -->
+    <div class="offset-md-3 p-col-12 p-md-6">
+      <div class="card p-4 shadow-sm">
+        <h2 class="text-center mb-4">Advisor</h2>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="p-fluid">
+          <div class="p-grid">
+            <div class="p-col-12 mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                pInputText
+                id="name"
+                formControlName="Name"
+                [style]="{ width: '100%' }"
+              />
+              <small
+                class="p-error"
+                *ngIf="
+                  userForm.get('Name')?.invalid && userForm.get('Name')?.touched
+                "
+              >
+                Name is required And Max 255 characters
+              </small>
+            </div>
+
+            <div class="p-col-12 mb-3">
+              <label for="sin" class="form-label">SIN</label>
+              <input
+                type="text"
+                pInputText
+                id="sin"
+                (keypress)="alphabateNotallowed($event)"
+                (paste)="onPaste($event)"
+                formControlName="SIN"
+                [style]="{ width: '100%' }"
+              />
+              <small
+                class="p-error"
+                *ngIf="
+                  userForm.get('SIN')?.invalid && userForm.get('SIN')?.touched
+                "
+              >
+                SIN is required and must be in the format 999999999.
+              </small>
+            </div>
+
+            <div class="p-col-12 mb-3">
+              <label for="sin" class="form-label">Phone</label>
+              <input
+                type="text"
+                pInputText
+                id="phone"
+                (keypress)="alphabateNotallowedphone($event)"
+                (paste)="onPastephone($event)"
+                formControlName="Phone"
+                [style]="{ width: '100%' }"
+              />
+              <small
+                class="p-error"
+                *ngIf="
+                  userForm.get('Phone')?.invalid &&
+                  userForm.get('Phone')?.touched
+                "
+              >
+                phone is required and must be in the format 999999999.
+              </small>
+            </div>
+            <div class="p-col-12 mb-3">
+              <label for="address" class="form-label">Address</label>
+              <textarea
+                pInputText
+                id="address"
+                formControlName="Address"
+                [style]="{ width: '100%' }"
+                maxlength="255"
+                rows="2"
+                (input)="updateCharacterCount()"
+                [attr.maxlength]="200"
+              ></textarea>
+
+              <small
+                class="p-error"
+                *ngIf="
+                  userForm.get('Address')?.hasError('maxlength') &&
+                  userForm.get('Address')?.touched
+                "
+              >
+                Address must be less than or equal to 255 characters.
+              </small>
+            </div>
+            <div class="p-col-12">
+              <button
+                pButton
+                type="submit"
+                label="Submit"
+                class="p-button-primary"
+                [style]="{ width: '100%', 'border-radius': '10px' }"
+                [disabled]="userForm.invalid"
+              ></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

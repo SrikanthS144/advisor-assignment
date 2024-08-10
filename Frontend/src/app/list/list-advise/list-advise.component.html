@@ -1,0 +1,126 @@
+<div class="table-container">
+  <form class="d-flex mb-3 mt-3" (ngSubmit)="search(searchValue)">
+    <input
+      style="margin-left: 10px"
+      class="form-control me-2"
+      type="search"
+      placeholder="Enter Name or SIN or Phone or Address"
+      aria-label="Search"
+      [(ngModel)]="searchValue"
+      name="searchFilter"
+    />
+    <button class="btn btn-outline-success" style="width: 100px" type="submit">
+      Search
+    </button>
+    <button
+      class="btn btn-outline-secondary ms-2"
+      style="margin-right: 18px; width: 100px"
+      type="button"
+      (click)="clearSearch()"
+    >
+      Clear
+    </button>
+  </form>
+  <p-table
+    #gridtable
+    appGridColumnFilter
+    [gridService]="listService"
+    [paginator]="true"
+    [first]="listService.state.skip ?? 0"
+    [rows]="listService.state.top ?? 10"
+    [totalRecords]="listService.state.totalCount ?? 0"
+    [lazy]="true"
+    sortMode="multiple"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 15%" pSortableColumn="Name">
+          Name <p-sortIcon field="Name"></p-sortIcon
+          ><p-columnFilter
+            type="text"
+            field="Name"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+        <th style="width: 15%" pSortableColumn="SIN">
+          SIN <p-sortIcon field="SIN"></p-sortIcon
+          ><p-columnFilter
+            type="text"
+            field="SIN"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+        <th style="width: 40%" pSortableColumn="Address">
+          Address <p-sortIcon field="Address"></p-sortIcon
+          ><p-columnFilter
+            type="text"
+            field="Address"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+        <th style="width: 10%" pSortableColumn="Phone">
+          Phone <p-sortIcon field="Phone"></p-sortIcon
+          ><p-columnFilter
+            type="text"
+            field="Phone"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+        <th style="width: 20%" pSortableColumn="HealthStatus">
+          Health Status
+          <p-columnFilter
+            type="text"
+            field="HealthStatus"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+
+        <th style="width: 20%">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-advisor>
+      <tr>
+        <td>{{ advisor.Name }}</td>
+        <td>{{ advisor.Sin | sinMask }}</td>
+        <td>{{ advisor.Address }}</td>
+        <td>{{ advisor.Phone }}</td>
+        <td>
+          <div class="progress-bar-container">
+            <div
+              class="progress-bar"
+              [ngClass]="{
+                'progress-bar-green':
+                  healthPercentage(advisor.HealthStatus) > 60,
+                'progress-bar-yellow':
+                  healthPercentage(advisor.HealthStatus) <= 60 &&
+                  healthPercentage(advisor.HealthStatus) > 20,
+                'progress-bar-red': healthPercentage(advisor.HealthStatus) <= 20
+              }"
+              [style.width.%]="healthPercentage(advisor.HealthStatus)"
+            >
+              {{ advisor.HealthStatus }}
+            </div>
+          </div>
+        </td>
+        <td class="d-flex p-2">
+          <i
+            class="pi pi-pencil p-2 text-primary"
+            style="cursor: pointer"
+            routerLink="/add-advise/{{ advisor.AdvisorId }}"
+          ></i>
+          <i
+            class="pi pi-trash p-2 w-25 text-danger"
+            style="cursor: pointer"
+            (click)="confirmDelete(advisor.AdvisorId)"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="10" class="text-center">No Advice found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-confirmDialog></p-confirmDialog>
+</div>
