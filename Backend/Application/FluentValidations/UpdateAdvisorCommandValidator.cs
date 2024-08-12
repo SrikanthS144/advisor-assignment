@@ -36,7 +36,8 @@ namespace Application.FluentValidations
 
             RuleFor(advisor => advisor.HealthStatus)
                 .Matches(@"^\d+$")
-                .WithMessage("HealthStatus must be a numeric value.");
+                .WithMessage("HealthStatus must be a numeric value.")
+                .When(command => !string.IsNullOrEmpty(command.HealthStatus)); ;
         }
     }
 }

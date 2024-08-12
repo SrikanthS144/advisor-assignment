@@ -1,9 +1,4 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Application.Advisors;
 using AutoMapper;
 using MediatR;
@@ -56,7 +51,6 @@ namespace TestAdvisor.Tests.Application
             // act & assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _handler.Handle(command, CancellationToken.None));
             Assert.Contains("AdvisorId must be greater than zero.", exception.Message);
-
         }
 
         [Fact]
@@ -66,7 +60,6 @@ namespace TestAdvisor.Tests.Application
             var command = new UpdateAdvisorCommand
             {
                 AdvisorId = 36,
-
                 Name = "Test Lession 1",
                 SIN = "987456328",
                 Address = "dfrtgsred",
@@ -94,10 +87,9 @@ namespace TestAdvisor.Tests.Application
                 Phone = "25874103"
             };
 
-            // act;
+            // act & assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _handler.Handle(command, CancellationToken.None));
             Assert.Equal("SIN number is already exist", exception.Message);
-
         }
 
         [Fact]
@@ -107,14 +99,13 @@ namespace TestAdvisor.Tests.Application
             var command = new UpdateAdvisorCommand
             {
                 AdvisorId = 36,
-
                 Name = "Test Lession 1",
                 SIN = "748896123",
                 Address = "dfrtgsred",
                 Phone = "698523"
             };
 
-            // act;
+            // act & assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _handler.Handle(command, CancellationToken.None));
             Assert.Contains("Phone number must be exactly 8 digits.", exception.Message);
         }
@@ -126,14 +117,13 @@ namespace TestAdvisor.Tests.Application
             var command = new UpdateAdvisorCommand
             {
                 AdvisorId = 36,
-
                 Name = "",
                 SIN = "748596123",
                 Address = "dfrtgsred",
                 Phone = "12345678"
             };
 
-            // act;
+            // act & assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _handler.Handle(command, CancellationToken.None));
             Assert.Contains("Name is required.", exception.Message);
         }

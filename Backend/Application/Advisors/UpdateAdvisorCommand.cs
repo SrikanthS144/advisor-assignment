@@ -62,11 +62,10 @@ namespace Application.Advisors
 
                 if (command.HealthStatus != null)
                 {
-                    entity.HealthStatus = command.HealthStatus;
+                    entity.HealthStatus = command.HealthStatus +"%";
                 }
 
                 await _context.SaveChangesAsync(cancellationToken);
-
                 return entity;
             }
         }

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 namespace Api.OData
 {
     [ODataRouteComponent("odata")]
-
     public class ODataControllerBase : ODataController
     {
         private IMediator? _mediator;

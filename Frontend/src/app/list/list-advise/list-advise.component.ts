@@ -45,27 +45,39 @@ export class ListAdviseComponent implements OnInit {
 
   ngOnInit() {
     this.loaderService.show();
+    this.clearSearch()
     this.listService.read();
     this.loaderService.hide();
   }
 
   public search(searchValue: string) {
     this.searchValue = searchValue.trim();
-    if (searchValue.length > 0) {
+    if (this.searchValue.length > 0) {
       this.loaderService.show();
       this.listService.defaultFilter = this.getFilters();
       this.listService.gridState.operators = 'or';
+      if(this.gridTable){
+        this.listService.onFilterChange({
+          first: this.gridTable._first,
+          rows: this.gridTable._rows,
+          sortOrder: this.gridTable.sortOrder,
+          filters: this.gridTable.filters,
+          globalFilter: null,
+        });
+      }
       this.loaderService.hide();
     } else {
       this.listService.defaultFilter = null;
+      if(this.gridTable){
+      this.listService.onFilterChange({
+        first: this.gridTable._first,
+        rows: this.gridTable._rows,
+        sortOrder: this.gridTable.sortOrder,
+        filters: this.gridTable.filters,
+        globalFilter: null,
+      });
     }
-    this.listService.onFilterChange({
-      first: this.gridTable._first,
-      rows: this.gridTable._rows,
-      sortOrder: this.gridTable.sortOrder,
-      filters: this.gridTable.filters,
-      globalFilter: null,
-    });
+    }
   }
 
   public getFilters() {

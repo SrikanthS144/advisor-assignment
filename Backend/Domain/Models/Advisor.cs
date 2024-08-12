@@ -1,6 +1,4 @@
 ﻿using Domain.Extend;
-using System;
-using System.Collections.Generic;
 
 namespace Domain.Models
 {

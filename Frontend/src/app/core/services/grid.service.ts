@@ -105,19 +105,22 @@ export abstract class GridService {
           const filterValue = typeof value === 'string' ? `'${value}'` : value;
           switch (matchMode) {
             case 'startsWith':
-              filterQueries.push(`startswith(${field}, ${filterValue})`);
+              filterQueries.push(`startswith(tolower(${field}), ${filterValue.toLowerCase()})`);
               break;
             case 'endsWith':
-              filterQueries.push(`endswith(${field}, ${filterValue})`);
+              filterQueries.push(`endswith(tolower(${field}), ${filterValue.toLowerCase()})`);
               break;
             case 'contains':
-              filterQueries.push(`contains(${field}, ${filterValue})`);
+              filterQueries.push(`contains(tolower(${field}), ${filterValue.toLowerCase()})`);
+              break;
+            case 'notContains':
+              filterQueries.push(`not(contains(tolower(${field}), ${filterValue.toLowerCase()}))`);
               break;
             case 'equals':
-              filterQueries.push(`${field} eq ${filterValue}`);
+              filterQueries.push(`tolower(${field}) eq ${filterValue.toLowerCase()}`);
               break;
             case 'notEquals':
-              filterQueries.push(`${field} ne ${filterValue}`);
+              filterQueries.push(`tolower(${field})   ne ${filterValue.toLowerCase()}`);
               break;
             // Add other cases as needed
           }

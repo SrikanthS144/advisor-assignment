@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Advisors
 {
     public class DeleteAdvisorCommand :IRequest<Advisor>
-
     {
         public int Key { get; set; }
         public class Handler : IRequestHandler<DeleteAdvisorCommand, Advisor>
